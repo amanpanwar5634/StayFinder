@@ -1,28 +1,34 @@
-import express from "express"
+import express from "express";
 import "dotenv/config";
-import cors from "cors"
+import cors from "cors";
 import { connectDb } from "./config/db.js";
-import { clerkMiddleware } from '@clerk/express'
+import { clerkMiddleware } from '@clerk/express';
 import clerkWebhooks from "./controllers/clerk.js";
-console.log("hi");
-//dv connnection
+
+const app = express();
+const port = 4000;
+
+// DB connection
 connectDb();
-//app config
-const app=express();
-const port=4000;
-app.use(cors()); //allow backend to connect with frontend
-//middleware
- 
+
+// CORS
+app.use(cors());
+
+// Webhook route first (must use raw body!)
+app.post("/api/clerk", express.raw({ type: 'application/json' }), clerkWebhooks);
+
+// JSON parser for other routes
 app.use(express.json());
 
+// Clerk middleware (optional if using Clerk for auth-protected routes)
 app.use(clerkMiddleware());
- 
-app.use("/api/clerk", clerkWebhooks);
- 
-app.get("/",(req,res)=>{
-    res.send("api working successfully");
-})
- 
-app.listen(port,()=>{
-    console.log(`app is listening on http://localhost:${port}`);
-})
+
+// Sample route
+app.get("/", (req, res) => {
+  res.send("API working successfully");
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+});
