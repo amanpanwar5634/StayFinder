@@ -1,0 +1,283 @@
+[
+  {
+    "room": {
+      "id": "1",
+      "title": "The Grand Palace Hotel",
+      "address": "123 Ocean Avenue, Mumbai",
+      "city": "Mumbai",
+      "rupeesPerNight": 4500,
+      "rating": 4.5,
+      "roomType": "Luxury Room",
+      "images": [
+        "https://plus.unsplash.com/premium_photo-1661962360690-e91cc0df88f1?w=400&auto=format&fit=crop&q=60",
+        "https://plus.unsplash.com/premium_photo-1661877303180-19a028c21048?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1693956964978-eaa42f2e4074?w=400&auto=format&fit=crop&q=60"
+      ],
+      "facilities": [
+        { "icon": "🛏️", "label": "Luxury Suites" },
+        { "icon": "🌐", "label": "Free Wi-Fi" },
+        { "icon": "🏋️", "label": "Gym Access" }
+      ],
+      "hotel": {
+        "name": "The Grand Palace Hotel",
+        "owner": {
+          "name": "Owner 1",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "2",
+      "title": "Himalayan Retreat",
+      "address": "Shimla Hills, Himachal Pradesh",
+      "city": "Shimla",
+      "rupeesPerNight": 3200,
+      "rating": 4.3,
+      "roomType": "Double Bed",
+      "images": [
+        "https://source.unsplash.com/featured/?hotel,shimla,2",
+        "https://source.unsplash.com/featured/?doublebed,room",
+        "https://source.unsplash.com/featured/?mountain,hotel"
+      ],
+      "facilities": [
+        { "icon": "🔥", "label": "Heated Rooms" },
+        { "icon": "🧘", "label": "Yoga Deck" },
+        { "icon": "🥘", "label": "Traditional Cuisine" }
+      ],
+      "hotel": {
+        "name": "Himalayan Retreat",
+        "owner": {
+          "name": "Owner 2",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "3",
+      "title": "Beachside Bliss Resort",
+      "address": "Calangute Beach, Goa",
+      "city": "Goa",
+      "rupeesPerNight": 5400,
+      "rating": 4.7,
+      "roomType": "Family",
+      "images": [
+        "https://source.unsplash.com/featured/?beach,resort,goa",
+        "https://source.unsplash.com/featured/?familyroom,goa",
+        "https://source.unsplash.com/featured/?hotelroom,beach"
+      ],
+      "facilities": [
+        { "icon": "🏖️", "label": "Private Beach" },
+        { "icon": "🍹", "label": "Beach Bar" },
+        { "icon": "🎶", "label": "Live Music" }
+      ],
+      "hotel": {
+        "name": "Beachside Bliss Resort",
+        "owner": {
+          "name": "Owner 3",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "4",
+      "title": "Desert Mirage Hotel",
+      "address": "Thar Desert, Jaisalmer",
+      "city": "Jaisalmer",
+      "rupeesPerNight": 2800,
+      "rating": 4.2,
+      "roomType": "Single Bed",
+      "images": [
+        "https://source.unsplash.com/featured/?desert,hotel,jaisalmer",
+        "https://source.unsplash.com/featured/?singlebed,hotel",
+        "https://source.unsplash.com/featured/?sand,room"
+      ],
+      "facilities": [
+        { "icon": "🐫", "label": "Camel Safari" },
+        { "icon": "🏜️", "label": "Desert View Rooms" },
+        { "icon": "🌅", "label": "Sunset Terrace" }
+      ],
+      "hotel": {
+        "name": "Desert Mirage Hotel",
+        "owner": {
+          "name": "Owner 4",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "5",
+      "title": "City Lights Inn",
+      "address": "Connaught Place, Delhi",
+      "city": "Delhi",
+      "rupeesPerNight": 3900,
+      "rating": 4.0,
+      "roomType": "Double Bed",
+      "images": [
+        "https://source.unsplash.com/featured/?cityhotel,delhi",
+        "https://source.unsplash.com/featured/?room,metro",
+        "https://source.unsplash.com/featured/?doublebed,hotelroom"
+      ],
+      "facilities": [
+        { "icon": "🏙️", "label": "City View" },
+        { "icon": "🚇", "label": "Near Metro Station" },
+        { "icon": "📶", "label": "High-Speed Wi-Fi" }
+      ],
+      "hotel": {
+        "name": "City Lights Inn",
+        "owner": {
+          "name": "Owner 5",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "6",
+      "title": "Backwater Villa",
+      "address": "Alleppey, Kerala",
+      "city": "Alleppey",
+      "rupeesPerNight": 4100,
+      "rating": 4.6,
+      "roomType": "Family",
+      "images": [
+        "https://source.unsplash.com/featured/?backwater,kerala,hotel",
+        "https://source.unsplash.com/featured/?family,houseboat",
+        "https://source.unsplash.com/featured/?villa,room"
+      ],
+      "facilities": [
+        { "icon": "🚣", "label": "Houseboat Rides" },
+        { "icon": "🌿", "label": "Ayurvedic Spa" },
+        { "icon": "🌊", "label": "Backwater View" }
+      ],
+      "hotel": {
+        "name": "Backwater Villa",
+        "owner": {
+          "name": "Owner 6",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "7",
+      "title": "Royal Ganges Resort",
+      "address": "Rishikesh Riverfront, Uttarakhand",
+      "city": "Rishikesh",
+      "rupeesPerNight": 3700,
+      "rating": 4.4,
+      "roomType": "Luxury Room",
+      "images": [
+        "https://source.unsplash.com/featured/?ganges,resort,hotel",
+        "https://source.unsplash.com/featured/?luxury,room,river",
+        "https://source.unsplash.com/featured/?resort,spa"
+      ],
+      "facilities": [
+        { "icon": "🕉️", "label": "Meditation Classes" },
+        { "icon": "🛶", "label": "River Rafting" },
+        { "icon": "🏞️", "label": "Mountain View" }
+      ],
+      "hotel": {
+        "name": "Royal Ganges Resort",
+        "owner": {
+          "name": "Owner 7",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "8",
+      "title": "Lakeview Resort",
+      "address": "Fatehsagar Lake, Udaipur",
+      "city": "Udaipur",
+      "rupeesPerNight": 4600,
+      "rating": 4.5,
+      "roomType": "Family",
+      "images": [
+        "https://source.unsplash.com/featured/?lake,udaipur,resort",
+        "https://source.unsplash.com/featured/?family,room,view",
+        "https://source.unsplash.com/featured/?palace,hotel"
+      ],
+      "facilities": [
+        { "icon": "🚤", "label": "Boat Rides" },
+        { "icon": "🌅", "label": "Lake View Rooms" },
+        { "icon": "🏰", "label": "Palace Tours" }
+      ],
+      "hotel": {
+        "name": "Lakeview Resort",
+        "owner": {
+          "name": "Owner 8",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "9",
+      "title": "The Highland Escape",
+      "address": "Ooty Valley, Tamil Nadu",
+      "city": "Ooty",
+      "rupeesPerNight": 3500,
+      "rating": 4.1,
+      "roomType": "Single Bed",
+      "images": [
+        "https://source.unsplash.com/featured/?ooty,valley,hotel",
+        "https://source.unsplash.com/featured/?single,bedroom,view",
+        "https://source.unsplash.com/featured/?hillstation,room"
+      ],
+      "facilities": [
+        { "icon": "🚞", "label": "Toy Train Nearby" },
+        { "icon": "🌲", "label": "Scenic Trails" },
+        { "icon": "🔥", "label": "Bonfire Nights" }
+      ],
+      "hotel": {
+        "name": "The Highland Escape",
+        "owner": {
+          "name": "Owner 9",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  },
+  {
+    "room": {
+      "id": "10",
+      "title": "Snowflake Residency",
+      "address": "Gulmarg Meadows, Kashmir",
+      "city": "Gulmarg",
+      "rupeesPerNight": 4800,
+      "rating": 4.8,
+      "roomType": "Luxury Room",
+      "images": [
+        "https://source.unsplash.com/featured/?snow,hotel,gulmarg",
+        "https://source.unsplash.com/featured/?luxury,ski,room",
+        "https://source.unsplash.com/featured/?fireplace,hotel"
+      ],
+      "facilities": [
+        { "icon": "🎿", "label": "Ski Access" },
+        { "icon": "❄️", "label": "Snow View Rooms" },
+        { "icon": "🔥", "label": "Heated Lounge" }
+      ],
+      "hotel": {
+        "name": "Snowflake Residency",
+        "owner": {
+          "name": "Owner 10",
+          "image": "https://source.unsplash.com/featured/?person,owner"
+        }
+      }
+    }
+  }
+]
+

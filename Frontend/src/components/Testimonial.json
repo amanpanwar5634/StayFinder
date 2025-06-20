@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "image": "https://randomuser.me/api/portraits/women/44.jpg",
+      "name": "Aarohi Sharma",
+      "address": "Delhi, India",
+      "rating": 4.9,
+      "review": "My experience at the resort was amazing. Staff was courteous and the view was spectacular. Highly recommend!"
+    },
+    {
+      "id": 2,
+      "image": "https://randomuser.me/api/portraits/men/32.jpg",
+      "name": "Raj Malhotra",
+      "address": "Mumbai, Maharashtra",
+      "rating": 4.7,
+      "review": "Great location, clean rooms, and delicious food. I’ll definitely come back with my family."
+    },
+    {
+      "id": 3,
+      "image": "https://randomuser.me/api/portraits/women/68.jpg",
+      "name": "Sneha Verma",
+      "address": "Pune, Maharashtra",
+      "rating": 5.0,
+      "review": "Absolutely loved the mountain view and the peaceful surroundings. Worth every penny!"
+    }
+  ]
+  

@@ -1,0 +1,36 @@
+[
+    {
+      "id": 1,
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      "title": "Beachside Resort",
+      "description": "Relax at our premium beachside resort with amazing amenities.",
+      "expireDate": "2025-07-01",
+      "priceOff": "25%",
+      "rating": 4.5,
+      "rupeesPerNight": 3500,
+      "address": "Goa, India"
+    },
+    {
+      "id": 2,
+      "image": "https://images.unsplash.com/photo-1550951154-5c4bcd4957d2",
+      "title": "Mountain Getaway",
+      "description": "Escape to the mountains and enjoy the fresh air and views.",
+      "expireDate": "2025-07-10",
+      "priceOff": "30%",
+      "rating": 4.8,
+      "rupeesPerNight": 2800,
+      "address": "Manali, Himachal Pradesh"
+    },
+    {
+      "id": 3,
+      "image": "https://images.unsplash.com/photo-1505736027728-36b28b2a5d4f",
+      "title": "Luxury City Hotel",
+      "description": "Stay in the heart of the city with all the luxury you deserve.",
+      "expireDate": "2025-06-30",
+      "priceOff": "20%",
+      "rating": 4.7,
+      "rupeesPerNight": 4500,
+      "address": "Mumbai, Maharashtra"
+    }
+  ]
+  
