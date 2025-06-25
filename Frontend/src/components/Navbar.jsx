@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useUser, useClerk, UserButton } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
+import { useClerk, UserButton } from "@clerk/clerk-react";
 import { useLocation } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
+import { motion } from "framer-motion";
 import RegModal from "./RegModal";
 
 const BookIcon = () => (
@@ -23,36 +24,34 @@ const BookIcon = () => (
 
 export default function Navbar() {
   const { openSignIn } = useClerk();
-  const { user } = useUser();
-  const navigate = useNavigate();
   const location = useLocation();
-
+  const { user, navigate, isOwner, setShowHotelReg } = useAppContext();
   const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setSticky(window.scrollY > 0);
-    };
+    const handleScroll = () => setSticky(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div
-      className={`container mx-auto md:px-20 px-4 fixed left-0 top-0 right-0 z-50 transition-all ease-in-out duration-300 ${
+    <motion.div
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         sticky
-          ? "bg-white shadow-md dark:bg-slate-900 dark:text-white"
-          : "bg-black bg-opacity-60 text-white"
+          ? "bg-white shadow-md text-gray-800"
+          : "bg-gradient-to-b from-black/70 to-transparent text-white"
       }`}
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
     >
-      <div className="navbar">
-        {/* Mobile Menu */}
+      <div className="navbar container mx-auto px-4 py-2">
+        {/* Mobile */}
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -67,31 +66,91 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className={`menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-[1]`}
+              className="menu menu-sm dropdown-content mt-3 p-3 shadow bg-white rounded-lg w-52 text-gray-800 space-y-2"
             >
-              <li><a href="/">Home</a></li>
-              <li><a href="/rooms">Hotels</a></li>
-              <li><a href="#">Experience</a></li>
-              <li><a href="#">About</a></li>
-             {user && <li><a href="/dashboard">Dashboard</a></li> } 
+              <li><a href="/" className="hover:text-yellow-500">Home</a></li>
+              <li><a href="/rooms" className="hover:text-yellow-500">Hotels</a></li>
+              <li><a href="#" className="hover:text-yellow-500">Experience</a></li>
+              {user && (
+                isOwner ? (
+                  <li><a href="/owner" className="hover:text-yellow-500">Dashboard</a></li>
+                ) : (
+                  <li>
+                    <button
+                      className="btn btn-sm bg-yellow-400 hover:bg-yellow-500 text-black transition"
+                      onClick={() => {
+                        setShowHotelReg(true);
+                        document.getElementById("my_modal_2").showModal();
+                      }}
+                    >
+                      List your Hotel
+                    </button>
+                  </li>
+                )
+              )}
             </ul>
           </div>
-          <a className="btn btn-ghost text-3xl">StayFinder</a>
+          <motion.a
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-2xl font-bold tracking-wide ml-2"
+          >
+            StayFinder
+          </motion.a>
         </div>
 
-        {/* Desktop Menu Centered */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-4 text-md font-medium">
-            <li><a href="/">Home</a></li>
-            <li><a href="/rooms">Hotels</a></li>
-            <li><a href="#">Experience</a></li>
-            <button className="btn" onClick={()=>document.getElementById('my_modal_2').showModal()}>about</button><RegModal/>
-            {user && <li><a href="/dashboard">Dashboard</a></li> }
+        {/* Desktop */}
+        <motion.div
+          className="navbar-center hidden lg:flex"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <ul className="menu menu-horizontal gap-6 text-md font-semibold tracking-wide">
+            {["Home", "Hotels", "Experience"].map((label, i) => (
+              <motion.li
+                key={label}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <a
+                  href={label === "Home" ? "/" : label === "Hotels" ? "/rooms" : "#"}
+                  className="relative group"
+                >
+                  {label}
+                  <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-yellow-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+              </motion.li>
+            ))}
+
+            {user && (
+              isOwner ? (
+                <motion.li whileHover={{ scale: 1.05 }}>
+                  <a href="/owner" className="relative group">
+                    Dashboard
+                    <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-yellow-400 group-hover:w-full transition-all duration-300"></span>
+                  </a>
+                </motion.li>
+              ) : (
+                <motion.li whileHover={{ scale: 1.05 }}>
+                  <button
+                    className="px-3 py-1.5 rounded bg-yellow-400 hover:bg-yellow-500 text-black transition"
+                    onClick={() => {
+                      setShowHotelReg(true);
+                      document.getElementById("my_modal_2").showModal();
+                    }}
+                  >
+                    List your Hotel
+                  </button>
+                </motion.li>
+              )
+            )}
           </ul>
-        </div>
+        </motion.div>
 
-        {/* User Buttons */}
-        <div className="navbar-end space-x-3">
+        {/* Right: Auth */}
+        <div className="navbar-end space-x-4">
           {user ? (
             <UserButton>
               <UserButton.MenuItems>
@@ -103,15 +162,16 @@ export default function Navbar() {
               </UserButton.MenuItems>
             </UserButton>
           ) : (
-            <button
-              className="bg-yellow-400 text-black px-5 py-2 rounded-md hover:bg-yellow-500 transition duration-300"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="bg-yellow-400 text-black px-5 py-2 rounded-md hover:bg-yellow-500 transition"
               onClick={openSignIn}
             >
               Log In
-            </button>
+            </motion.button>
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

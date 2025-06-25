@@ -1,35 +1,51 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom"; // ✅ needed for URL params
 import SideBar from "./SideBar";
 import Roomlist from "./Roomlist";
-import hotelData from "../list.json";
+import { useAppContext } from "../../context/AppContext";
 
 export default function Allroom() {
+  const { rooms } = useAppContext();
+  const [searchParams] = useSearchParams(); // ✅ Get the destination from URL
+
   const [filters, setFilters] = useState({
     priceRange: [],
     roomTypes: [],
     sortBy: "",
   });
 
-  const filteredHotels = hotelData
-    .filter((hotel) => {
-      // Price range filter
+  // ✅ Get destination from URL
+  const destination = searchParams.get("destination");
+
+  // ✅ First filter rooms by destination (if any)
+  const destinationFilteredRooms = rooms?.filter((room) => {
+    if (!destination) return true;
+    return room.hotel.city
+      .toLowerCase()
+      .includes(destination.toLowerCase());
+  });
+
+  // ✅ Then apply price range, room type, and sorting filters
+  const filteredRooms = destinationFilteredRooms
+    ?.filter((room) => {
+      // Price Filter
       if (filters.priceRange.length) {
         const match = filters.priceRange.some((range) => {
-          if (range === "0-500") return hotel.rupeesPerNight <= 500;
+          if (range === "0-500") return room.pricePerNight <= 500;
           if (range === "500-1000")
-            return hotel.rupeesPerNight > 500 && hotel.rupeesPerNight <= 1000;
+            return room.pricePerNight > 500 && room.pricePerNight <= 1000;
           if (range === "1000-3000")
-            return hotel.rupeesPerNight > 1000 && hotel.rupeesPerNight <= 3000;
-          if (range === "3000+") return hotel.rupeesPerNight > 3000;
+            return room.pricePerNight > 1000 && room.pricePerNight <= 3000;
+          if (range === "3000+") return room.pricePerNight > 3000;
           return true;
         });
         if (!match) return false;
       }
 
-      // Room type filter (based on hotel.roomType field now)
+      // Room Type Filter
       if (
         filters.roomTypes.length &&
-        !filters.roomTypes.includes(hotel.roomType)
+        !filters.roomTypes.includes(room.roomType)
       ) {
         return false;
       }
@@ -38,10 +54,11 @@ export default function Allroom() {
     })
     .sort((a, b) => {
       if (filters.sortBy === "lowToHigh")
-        return a.rupeesPerNight - b.rupeesPerNight;
+        return a.pricePerNight - b.pricePerNight;
       if (filters.sortBy === "highToLow")
-        return b.rupeesPerNight - a.rupeesPerNight;
-      if (filters.sortBy === "rating") return b.rating - a.rating;
+        return b.pricePerNight - a.pricePerNight;
+      if (filters.sortBy === "rating")
+        return (b.rating || 0) - (a.rating || 0);
       return 0;
     });
 
@@ -56,7 +73,7 @@ export default function Allroom() {
 
       {/* Roomlist */}
       <div className="w-full md:w-[70%] px-4">
-        <Roomlist data={filteredHotels} />
+        <Roomlist data={filteredRooms} />
       </div>
     </div>
   );

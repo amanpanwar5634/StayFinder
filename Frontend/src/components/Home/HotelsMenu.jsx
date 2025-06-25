@@ -1,15 +1,25 @@
 import React from "react";
-import hotelData from "../list.json";
+import { motion } from "framer-motion";
 import HotelCard from "./HotelCard";
-import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../context/AppContext";
 
 export default function HotelsMenu() {
-  const navigate = useNavigate();
+  const { rooms, navigate } = useAppContext();
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-12">
+    <motion.div
+      className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-12"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       {/* Header Section */}
-      <div className="text-center mb-12">
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
         <h1 className="text-3xl md:text-5xl font-bold text-slate-800 dark:text-white">
           Find Your Perfect <span className="text-yellow-500">Stay</span>
         </h1>
@@ -18,25 +28,49 @@ export default function HotelsMenu() {
           a luxurious escape, a serene retreat, or a city adventure — your comfort
           begins here.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Hotel Card Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
-  {hotelData.slice(0, 6).map((el) => (
- <HotelCard key={el.room.id} room={el.room} />
-  ))}
-</div>
-
+      {/* Hotel Cards or No Rooms Message */}
+      {rooms && rooms.length > 0 ? (
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+        >
+          {rooms.slice(0, 6).map((room) => (
+            <HotelCard key={room._id} room={room} />
+          ))}
+        </motion.div>
+      ) : (
+        <div className="text-center mt-16 text-xl text-gray-600 dark:text-gray-300">
+          No rooms available at the moment. Please check back later!
+        </div>
+      )}
 
       {/* View All Button */}
-      <div className="text-center mt-12">
-        <button
-          onClick={() => navigate('/rooms')}
-          className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      {rooms && rooms.length > 0 && (
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
         >
-          View All Hotels →
-        </button>
-      </div>
-    </div>
+          <button
+            onClick={() => navigate("/rooms")}
+            className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          >
+            View All Hotels →
+          </button>
+        </motion.div>
+      )}
+    </motion.div>
   );
 }

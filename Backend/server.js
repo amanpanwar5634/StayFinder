@@ -4,13 +4,17 @@ import cors from "cors";
 import { connectDb } from "./config/db.js";
 import { clerkMiddleware } from '@clerk/express';
 import clerkWebhooks from "./controllers/clerk.js";
-
+import userRouter from "./routes/userRoute.js";
+import hotelRouter from "./routes/HotelRoute.js";
+import { connectCloudinary } from "./config/cloudinary.js";
+import roomRouter from "./routes/RoomRoute.js";
+import bookingRouter from "./routes/BookingRoute.js";
 const app = express();
 const port = 4000;
 
 // DB connection
 connectDb();
-
+connectCloudinary();//connect cloudinary
 // CORS
 app.use(cors());
 
@@ -27,7 +31,10 @@ app.use(clerkMiddleware());
 app.get("/", (req, res) => {
   res.send("API working successfully");
 });
-
+app.use('/api/user',userRouter);
+app.use('/api/hotels',hotelRouter);
+app.use('/api/rooms',roomRouter);
+app.use('/api/bookings',bookingRouter);
 // Start server
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

@@ -1,40 +1,28 @@
 import React from "react";
 import Offerlist from "../Offerlist.json";
-import ExclusiveCard from "./ExclusiveCard"; // Make sure this is the updated card component
+import ExclusiveCard from "./ExclusiveCard";
 import { useNavigate } from "react-router-dom";
 
 export default function ExclusiveMenu() {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-12">
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-16">
       {/* Header Section */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-14">
         <h1 className="text-3xl md:text-5xl font-bold text-slate-800 dark:text-white">
-          Find Your Perfect <span className="text-yellow-500">Stay</span>
+          <span className="text-yellow-500">Exclusive</span> Hotel Offers Just for You
         </h1>
-        <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
-          Explore top-rated hotels across breathtaking destinations. Whether it's
-          a luxurious escape, a serene retreat, or a city adventure — your comfort
-          begins here.
+        <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
+          Discover unbeatable deals, limited-time promotions, and handpicked offers that make your next stay more affordable and memorable. Whether it's a romantic getaway, family trip, or solo adventure — we’ve got something special for you.
         </p>
       </div>
 
       {/* Offer Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {Offerlist.map((item) => (
           <ExclusiveCard key={item.id} item={item} />
         ))}
-      </div>
-
-      {/* View All Offers Button */}
-      <div className="text-center mt-12">
-        <button
-          onClick={() => navigate("/offer")}
-          className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        >
-          View All Offers →
-        </button>
       </div>
     </div>
   );

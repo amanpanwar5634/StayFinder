@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { assets } from "../assets/assets"; // adjust path if needed
+import React, { useState, useEffect } from "react";
+import { assets, cities } from "../assets/assets.js";
+import { useAppContext } from "../context/AppContext.jsx";
+import { toast } from "react-hot-toast";
 
 export default function RegModal() {
+  const { showHotelReg, setShowHotelReg, axios, getToken, setIsOwner,isOwner } = useAppContext();
+
   const [formData, setFormData] = useState({
     hotelName: "",
     phone: "",
@@ -9,6 +13,13 @@ export default function RegModal() {
     city: "",
     termsAccepted: false,
   });
+
+  useEffect(() => {
+    const modal = document.getElementById("my_modal_2");
+    if (!modal) return;
+    if (showHotelReg) modal.showModal();
+    else modal.close();
+  }, [showHotelReg]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -18,15 +29,44 @@ export default function RegModal() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.termsAccepted) {
-      alert("Please accept the terms and conditions.");
+      toast.error("Please accept the terms and conditions.");
       return;
     }
-    console.log("Form Submitted:", formData);
-    // Close modal manually
-    document.getElementById("my_modal_2").close();
+
+    try {
+      const { data } = await axios.post(
+        "/api/hotels/",
+        {
+          name: formData.hotelName,
+          address: formData.address,
+          contact: formData.phone,
+          city: formData.city,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${await getToken()}`,
+          },
+        }
+      );
+
+      if (data.success) {
+        toast.success(data.message || "Hotel registered successfully!");
+        setIsOwner(true);
+        document.getElementById("my_modal_2").close(); // ✅ Close modal
+        setShowHotelReg(false); // optional for state syncx
+        console.log("after the addinge isOwner value",isOwner);
+      } else {
+        toast.error(data.message || "Registration failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message || err.message || "Something went wrong.");
+    }
   };
 
   return (
@@ -74,15 +114,21 @@ export default function RegModal() {
                 required
                 className="input input-bordered w-full"
               />
-              <input
-                type="text"
+
+              <select
                 name="city"
-                placeholder="City"
                 value={formData.city}
                 onChange={handleChange}
                 required
-                className="input input-bordered w-full"
-              />
+                className="select select-bordered w-full"
+              >
+                <option value="">Select City</option>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
 
               {/* Terms Checkbox */}
               <div className="flex items-center gap-2">
@@ -98,10 +144,7 @@ export default function RegModal() {
                 </label>
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary w-full mt-2"
-              >
+              <button type="submit" className="btn btn-primary w-full mt-2">
                 Register
               </button>
             </form>
@@ -110,7 +153,7 @@ export default function RegModal() {
       </div>
 
       {/* Close on backdrop */}
-      <form method="dialog" className="modal-backdrop">
+      <form method="dialog" className="modal-backdrop" onClick={() => setShowHotelReg(false)}>
         <button>close</button>
       </form>
     </dialog>
