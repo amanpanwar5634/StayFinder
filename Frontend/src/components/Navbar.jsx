@@ -83,7 +83,7 @@ export default function Navbar() {
                         document.getElementById("my_modal_2").showModal();
                       }}
                     >
-                      List your Hotel
+                      Add Your Hotel
                     </button>
                   </li>
                 )
@@ -134,15 +134,18 @@ export default function Navbar() {
                 </motion.li>
               ) : (
                 <motion.li whileHover={{ scale: 1.05 }}>
-                  <button
-                    className="px-3 py-1.5 rounded bg-yellow-400 hover:bg-yellow-500 text-black transition"
-                    onClick={() => {
-                      setShowHotelReg(true);
-                      document.getElementById("my_modal_2").showModal();
-                    }}
-                  >
-                    List your Hotel
-                  </button>
+                  <a
+  href="#"
+  onClick={(e) => {
+    e.preventDefault(); // Prevent the default link behavior
+    setShowHotelReg(true);
+    document.getElementById("my_modal_2").showModal();
+  }}
+  className="hover:text-yellow-500"
+>
+  Add Your Hotel
+</a>
+
                 </motion.li>
               )
             )}
