@@ -22,7 +22,20 @@ export default function MyBooking() {
       toast.error(err.message);
     }
   };
-
+const handlePayment=async(bookingId)=>{
+  try{
+    const{data}=await axios.post('/api/bookings/stripe-payment',
+      {bookingId},{headers:{Authorization:`Bearer ${await getToken()}`}})
+      console.log("Data->",data,"data sucess->",data.success);
+      if(data.success){window.location.href=data.url}
+      else{console.log("errorpayment->",data.message);
+        toast.error(data.messge)}
+  }
+  catch(err){
+    console.log("payment error->",err.message);
+toast.error(err.message);
+  }
+}
   useEffect(() => {
     if (user) fetchUserBookings();
   }, [user]);
@@ -116,7 +129,8 @@ export default function MyBooking() {
                 <span className="px-4 py-1 rounded-full text-sm bg-yellow-100 text-yellow-700 font-semibold">
                   ⏳ Pending
                 </span>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 text-sm rounded shadow transition">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 text-sm rounded shadow transition"
+                onClick={()=>handlePayment(b._id)}>
                   Pay Now
                 </button>
               </>

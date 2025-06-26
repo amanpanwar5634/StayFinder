@@ -14,6 +14,9 @@ export default function RecommendedHotels() {
     setRecommended(filteredHotels);
   }, [rooms, searchedCities]);
 
+  // 🚫 Do not render the section at all if less than 3 recommendations
+  if (!recommended || recommended.length <= 2) return null;
+
   return (
     <motion.div
       className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-12"
@@ -34,24 +37,17 @@ export default function RecommendedHotels() {
         </p>
       </div>
 
-      {recommended && recommended.length > 0 ? (
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.2 }}
-        >
-          {recommended.slice(0, 3).map((room) => (
-            <HotelCard key={room._id} room={room} />
-          ))}
-        </motion.div>
-      ) : (
-        <div className="text-center mt-16 text-xl text-gray-600 dark:text-gray-300">
-          We couldn't find any recommendations for your selected cities right now.
-          Try exploring other destinations or check back later!
-        </div>
-      )}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ staggerChildren: 0.2 }}
+      >
+        {recommended.slice(0, 3).map((room) => (
+          <HotelCard key={room._id} room={room} />
+        ))}
+      </motion.div>
     </motion.div>
   );
 }

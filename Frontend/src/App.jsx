@@ -13,7 +13,7 @@ import AddRoom from "./components/HotelOwner/AddRoom";
 import HotelList from "./components/HotelOwner/HotelList";
 import { Toaster } from "react-hot-toast";
 import RegModal from "./components/RegModal.jsx"; // ✅ Add this
-
+import Loader from "./components/Loader.jsx";
 export default function App() {
   const isownerPath = useLocation().pathname.includes("owner");
 
@@ -28,6 +28,7 @@ export default function App() {
           <Route path='/rooms' element={<Allroom />} />
           <Route path='rooms/:id' element={<RoomDetail />} />
           <Route path='my-bookings' element={<MyBooking />} />
+          <Route path='loader/:nextUrl'element={<Loader/>}/>
           <Route path="/owner" element={<HotelOwner />}>
             <Route index element={<DashBoard />} />
             <Route path="add-room" element={<AddRoom />} />
